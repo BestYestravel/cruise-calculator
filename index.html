@@ -76,7 +76,8 @@ body {
 }
 
 .prefix-wrap input {
-  padding-left: 26px;
+  padding-left: 22px;
+  text-indent: 4px;
 }
 
 input[type="number"] {
@@ -330,9 +331,9 @@ input[type="range"] {
 <div class="slider-row">
   <div class="slider-label">
     FlexPay installments after deposit
-    <span id="payments-label">9</span>
+    <span id="payments-label">10</span>
   </div>
-  <input type="range" id="payments" min="1" max="9" value="9" step="1">
+  <input type="range" id="payments" min="1" max="10" value="10" step="1">
 </div>
 
 <div class="metric-grid">
@@ -349,7 +350,7 @@ input[type="range"] {
   <div class="metric">
     <div class="m-label">Each installment</div>
     <div class="m-val" id="per-payment">$833</div>
-    <div class="m-sub" id="per-payment-sub">over 9 payments</div>
+    <div class="m-sub" id="per-payment-sub">over 10 payments</div>
   </div>
 </div>
 
@@ -383,7 +384,7 @@ function fmt(n) {
 function calc() {
   const total = Math.max(500, parseFloat(document.getElementById('total').value) || 0);
   const travelers = Math.max(1, parseInt(document.getElementById('travelers').value) || 1);
-  const numPayments = parseInt(document.getElementById('payments').value) || 9;
+  const numPayments = parseInt(document.getElementById('payments').value) || 10;
 
   document.getElementById('payments-label').textContent = numPayments;
 
