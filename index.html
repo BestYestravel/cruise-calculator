@@ -97,6 +97,10 @@
   .pay-title.teal-text { color: #0F8A7B; }
   .pay-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
   .amt { font-weight: 800; font-size: 15px; white-space: nowrap; }
+  .disclaimer {
+    font-size: 12px; line-height: 1.6; color: var(--gray);
+    margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--border);
+  }
 </style>
 </head>
 <body>
@@ -105,8 +109,8 @@
   <p class="eyebrow">Royal Caribbean FlexPay</p>
   <h1>See what your family's cruise could actually cost — per month.</h1>
   <p class="intro">
-    Most families assume a trip like this is out of reach. But Royal Caribbean's FlexPay
-    lets you split the balance into up to 10 scheduled payments —
+    Most families assume a trip like this is out of reach. But FlexPay, offered through
+    Royal Caribbean&reg;, lets you split the balance into up to 10 scheduled payments —
     <b>zero interest, zero fees, no credit check.</b> It's only available through a travel
     advisor. Play with the numbers below and see what your plan could look like.
   </p>
@@ -132,7 +136,7 @@
       <option value="450">10–14 nights</option>
       <option value="500">15+ nights</option>
     </select>
-    <p class="field-note">Royal Caribbean's standard deposit is based on sailing length, not a flat per-person rate. (Sailing to Bermuda? Deposit is a flat $250/person regardless of length — pick "6–9 nights" here for that.)</p>
+    <p class="field-note">The standard deposit is based on sailing length, not a flat per-person rate. (Sailing to Bermuda? Deposit is a flat $250/person regardless of length — pick "6–9 nights" here for that.)</p>
   </div>
 
   <div class="slider-row">
@@ -166,6 +170,15 @@
     </thead>
     <tbody id="scheduleBody"></tbody>
   </table>
+
+  <p class="disclaimer">
+    This calculator is for planning purposes only — it is not a quote, invoice, or guarantee
+    of final pricing. Deposit amounts, taxes, fees, and FlexPay eligibility are confirmed by
+    Royal Caribbean at the time of booking and may change based on sailing date, stateroom
+    category, and current promotions. FlexPay is offered directly by Royal Caribbean and
+    subject to its own terms and eligibility requirements. Your Best Yes Travel is an
+    independent travel advisor affiliate and does not set, control, or guarantee these figures.
+  </p>
 
 </div>
 
