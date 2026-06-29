@@ -3,433 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlexPay Calculator — Your Best Yes Travel</title>
-<link href="https://fonts.googleapis.com/css2?family=Inclusive+Sans&display=swap" rel="stylesheet">
+<title>Cruise Calculator — Your Best Yes Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pink: #FF2D9B;
+    --pink-light: #FFE9F4;
+    --teal: #3DD6C8;
+    --teal-light: #E8FBF9;
+    --cobalt: #238BD2;
+    --text: #1A1A1A;
+    --gray: #6B7280;
+    --white: #FFFFFF;
+    --border: #ECECEC;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    padding: 32px 20px 64px;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
 
-body {
-  font-family: 'Inclusive Sans', sans-serif;
-  background: #ffffff;
-  color: #1a1a1a;
-  padding: 32px 24px 48px;
-  max-width: 680px;
-  margin: 0 auto;
-}
+  .eyebrow {
+    font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(26px, 5vw, 34px); font-weight: 800; color: var(--pink);
+    line-height: 1.25; margin-bottom: 18px;
+  }
+  .intro { font-size: 16px; line-height: 1.7; color: var(--text); margin-bottom: 22px; }
+  .intro b { font-weight: 800; }
 
-.intro {
-  margin-bottom: 28px;
-}
+  .divider { display: flex; height: 4px; border-radius: 2px; overflow: hidden; margin-bottom: 32px; }
+  .divider span { flex: 1; }
+  .divider .a { background: var(--pink); }
+  .divider .b { background: var(--cobalt); }
 
-.intro h2 {
-  font-size: 22px;
-  color: #FF2D9B;
-  font-weight: 700;
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
+  .inputs-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;
+  }
+  @media (max-width: 480px) { .inputs-row { grid-template-columns: 1fr; } }
+  label {
+    display: block; font-size: 13px; font-weight: 700; color: var(--text);
+    margin-bottom: 6px;
+  }
+  input[type="number"], select {
+    width: 100%; font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 700;
+    padding: 12px 14px; border: 2px solid var(--border); border-radius: 10px;
+    color: var(--text); background: var(--white);
+  }
+  input[type="number"]:focus, select:focus { outline: none; border-color: var(--teal); }
+  .field-block { margin-bottom: 22px; }
+  .field-note { font-size: 12px; color: var(--gray); margin-top: 6px; }
 
-.intro p {
-  font-size: 15px;
-  color: #444;
-  line-height: 1.7;
-}
+  .slider-row { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .slider-row label { margin-bottom: 0; white-space: nowrap; }
+  .slider-row input[type="range"] { flex: 1; accent-color: var(--pink); }
+  .slider-val { font-weight: 800; color: var(--pink); min-width: 22px; text-align: center; }
 
-.divider {
-  height: 3px;
-  background: linear-gradient(to right, #FF2D9B, #3DD6C8, #238BD2);
-  border-radius: 2px;
-  margin: 0 0 28px;
-}
+  .cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 36px; }
+  @media (max-width: 480px) { .cards-row { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--pink-light); border-radius: 12px; padding: 16px;
+  }
+  .card .label {
+    font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 6px;
+  }
+  .card .value { font-size: 24px; font-weight: 800; color: var(--pink); margin-bottom: 4px; }
+  .card .sub { font-size: 12px; color: var(--gray); }
 
-.input-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-}
-
-.field label {
-  font-size: 13px;
-  color: #555;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.prefix-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.prefix-wrap .prefix {
-  position: absolute;
-  left: 12px;
-  color: #888;
-  font-size: 15px;
-  pointer-events: none;
-}
-
-.prefix-wrap input {
-  padding-left: 22px;
-  text-indent: 4px;
-}
-
-input[type="number"] {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 8px;
-  font-family: 'Inclusive Sans', sans-serif;
-  font-size: 15px;
-  color: #1a1a1a;
-  background: #fafafa;
-  transition: border-color 0.2s;
-}
-
-input[type="number"]:focus {
-  outline: none;
-  border-color: #3DD6C8;
-  background: #fff;
-}
-
-.slider-row {
-  margin-bottom: 24px;
-}
-
-.slider-row .slider-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  color: #555;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.slider-row .slider-label span {
-  font-size: 16px;
-  font-weight: 700;
-  color: #FF2D9B;
-}
-
-input[type="range"] {
-  width: 100%;
-  accent-color: #FF2D9B;
-  height: 4px;
-  cursor: pointer;
-}
-
-.metric-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 28px;
-}
-
-.metric {
-  background: #fff8fe;
-  border: 1.5px solid #ffd6ee;
-  border-radius: 10px;
-  padding: 14px 16px;
-}
-
-.metric .m-label {
-  font-size: 11px;
-  color: #888;
-  margin-bottom: 4px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.metric .m-val {
-  font-size: 20px;
-  font-weight: 700;
-  color: #FF2D9B;
-  line-height: 1.2;
-}
-
-.metric .m-sub {
-  font-size: 11px;
-  color: #aaa;
-  margin-top: 3px;
-}
-
-.section-head {
-  font-size: 13px;
-  font-weight: 700;
-  color: #238BD2;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 12px;
-}
-
-.payment-header {
-  display: grid;
-  grid-template-columns: 36px 1fr auto;
-  gap: 8px;
-  padding: 0 4px 8px;
-  border-bottom: 2px solid #f0f0f0;
-  margin-bottom: 4px;
-}
-
-.payment-header span {
-  font-size: 11px;
-  font-weight: 700;
-  color: #aaa;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.payment-header span:last-child { text-align: right; }
-
-.payment-row {
-  display: grid;
-  grid-template-columns: 36px 1fr auto;
-  gap: 8px;
-  align-items: center;
-  padding: 10px 4px;
-  border-bottom: 1px solid #f5f5f5;
-}
-
-.payment-row.deposit-row {
-  background: #fff8fe;
-  border-radius: 8px;
-  border: 1.5px solid #ffd6ee;
-  padding: 10px 10px;
-  margin-bottom: 4px;
-}
-
-.payment-row.final-row {
-  background: #f0fcfb;
-  border-radius: 8px;
-  border: 1.5px solid #3DD6C8;
-  padding: 10px 10px;
-  margin-top: 4px;
-}
-
-.p-num {
-  font-size: 12px;
-  color: #bbb;
-  font-weight: 700;
-}
-
-.deposit-row .p-num { color: #FF2D9B; }
-.final-row .p-num { color: #3DD6C8; }
-
-.p-info { }
-.p-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
-.deposit-row .p-title { color: #FF2D9B; }
-.final-row .p-title { color: #0a7a60; }
-.p-sub { font-size: 11px; color: #aaa; margin-top: 1px; }
-
-.p-amt {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1a1a1a;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.deposit-row .p-amt { color: #FF2D9B; }
-.final-row .p-amt { color: #0a7a60; }
-
-.teal-callout {
-  background: #f0fcfb;
-  border-left: 4px solid #3DD6C8;
-  border-radius: 0 8px 8px 0;
-  padding: 14px 18px;
-  margin: 24px 0;
-}
-
-.teal-callout p {
-  font-size: 13px;
-  color: #1a1a1a;
-  line-height: 1.7;
-  margin: 0;
-}
-
-.teal-callout strong { color: #0a7a60; }
-
-.fine-print {
-  font-size: 11px;
-  color: #bbb;
-  line-height: 1.7;
-  margin: 16px 0 28px;
-}
-
-.cta-block {
-  background: #fff8fe;
-  border: 2px solid #ffd6ee;
-  border-radius: 14px;
-  padding: 28px 24px;
-  text-align: center;
-  margin-top: 8px;
-}
-
-.cta-block h3 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #FF2D9B;
-  margin-bottom: 10px;
-  line-height: 1.3;
-}
-
-.cta-block p {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.7;
-  max-width: 440px;
-  margin: 0 auto 20px;
-}
-
-.cta-btn {
-  display: inline-block;
-  padding: 14px 32px;
-  background: #FF2D9B;
-  color: #fff;
-  font-family: 'Inclusive Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.cta-btn:hover { opacity: 0.85; }
-
-@media (max-width: 480px) {
-  .input-row { grid-template-columns: 1fr; }
-  .metric-grid { grid-template-columns: 1fr 1fr; }
-  .metric:last-child { grid-column: 1 / -1; }
-}
+  .schedule-heading {
+    font-size: 14px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--cobalt); margin-bottom: 14px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    text-align: left; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--gray); padding: 0 0 10px; border-bottom: 2px solid var(--border);
+  }
+  thead th:last-child, tbody td:last-child { text-align: right; }
+  tbody td { padding: 14px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr.deposit-row { background: var(--pink-light); }
+  tbody tr.deposit-row td { padding: 14px 10px; border-bottom: none; border-radius: 10px; }
+  tbody tr.final-row td { border: 2px solid var(--teal); border-left: none; border-right: none; padding: 14px 10px; }
+  tbody tr.final-row td:first-child { border-left: 2px solid var(--teal); border-radius: 10px 0 0 10px; }
+  tbody tr.final-row td:last-child { border-right: 2px solid var(--teal); border-radius: 0 10px 10px 0; }
+  .pay-title { font-weight: 800; font-size: 15px; }
+  .pay-title.pink { color: var(--pink); }
+  .pay-title.teal-text { color: #0F8A7B; }
+  .pay-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
+  .amt { font-weight: 800; font-size: 15px; white-space: nowrap; }
 </style>
 </head>
 <body>
+<div class="wrap">
 
+  <p class="eyebrow">Royal Caribbean FlexPay</p>
+  <h1>See what your family's cruise could actually cost — per month.</h1>
+  <p class="intro">
+    Most families assume a trip like this is out of reach. But Royal Caribbean's FlexPay
+    lets you split the balance into up to 10 scheduled payments —
+    <b>zero interest, zero fees, no credit check.</b> It's only available through a travel
+    advisor. Play with the numbers below and see what your plan could look like.
+  </p>
 
-<div class="input-row">
-  <div class="field">
-    <label>Estimated trip total</label>
-    <div class="prefix-wrap">
-      <span class="prefix">$</span>
-      <input type="number" id="total" value="8000" min="500" max="50000" step="100">
+  <div class="divider"><span class="a"></span><span class="b"></span></div>
+
+  <div class="inputs-row">
+    <div>
+      <label for="tripTotal">Estimated trip total</label>
+      <input type="number" id="tripTotal" value="8000" min="0" step="100">
+    </div>
+    <div>
+      <label for="travelers">Number of travelers</label>
+      <input type="number" id="travelers" value="5" min="1" step="1">
     </div>
   </div>
-  <div class="field">
-    <label>Number of travelers</label>
-    <input type="number" id="travelers" value="5" min="1" max="10" step="1">
+
+  <div class="field-block">
+    <label for="cruiseLength">Cruise length</label>
+    <select id="cruiseLength">
+      <option value="100">1–5 nights</option>
+      <option value="250" selected>6–9 nights</option>
+      <option value="450">10–14 nights</option>
+      <option value="500">15+ nights</option>
+    </select>
+    <p class="field-note">Royal Caribbean's standard deposit is based on sailing length, not a flat per-person rate. (Sailing to Bermuda? Deposit is a flat $250/person regardless of length — pick "6–9 nights" here for that.)</p>
   </div>
-</div>
 
-<div class="slider-row">
-  <div class="slider-label">
-    FlexPay installments after deposit
-    <span id="payments-label">10</span>
+  <div class="slider-row">
+    <label for="installments">FlexPay installments after deposit</label>
+    <input type="range" id="installments" min="1" max="10" value="10" step="1">
+    <span class="slider-val" id="installmentsOut">10</span>
   </div>
-  <input type="range" id="payments" min="1" max="10" value="10" step="1">
-</div>
 
-<div class="metric-grid">
-  <div class="metric">
-    <div class="m-label">Deposit today</div>
-    <div class="m-val" id="deposit-total">$500</div>
-    <div class="m-sub" id="deposit-sub">$100 per person</div>
+  <div class="cards-row">
+    <div class="card">
+      <div class="label">Deposit today</div>
+      <div class="value" id="depositOut">$1,250</div>
+      <div class="sub" id="depositSub">$250 × 5 travelers</div>
+    </div>
+    <div class="card">
+      <div class="label">Balance via FlexPay</div>
+      <div class="value" id="balanceOut">$6,750</div>
+      <div class="sub">Interest-free, no fees</div>
+    </div>
+    <div class="card">
+      <div class="label">Each installment</div>
+      <div class="value" id="eachOut">$675</div>
+      <div class="sub" id="eachSub">over 10 payments</div>
+    </div>
   </div>
-  <div class="metric">
-    <div class="m-label">Balance via FlexPay</div>
-    <div class="m-val" id="balance">$7,500</div>
-    <div class="m-sub">Interest-free, no fees</div>
-  </div>
-  <div class="metric">
-    <div class="m-label">Each installment</div>
-    <div class="m-val" id="per-payment">$833</div>
-    <div class="m-sub" id="per-payment-sub">over 10 payments</div>
-  </div>
-</div>
 
-<div class="section-head">Your payment schedule</div>
+  <p class="schedule-heading">Your payment schedule</p>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Payment</th><th>Amount</th></tr>
+    </thead>
+    <tbody id="scheduleBody"></tbody>
+  </table>
 
-<div class="payment-header">
-  <span>#</span>
-  <span>Payment</span>
-  <span>Amount</span>
-</div>
-
-<div id="schedule"></div>
-
-<div class="teal-callout">
-  <p><strong>Travel protection tip:</strong> Royal Caribbean's protection plan can be added to your booking any time before final payment — and FlexPay automatically rebalances to include it. Worth bringing up early so it doesn't feel like a surprise later.</p>
-</div>
-
-<p class="fine-print">* Deposit of $100 per person applies to non-refundable deposit fares (NRD). FlexPay is available through a travel advisor only — not in the public booking flow. Amounts shown are estimates based on your input; actual pricing varies by ship, sail date, and cabin category. Payment dates shown are illustrative.</p>
-
-<div class="cta-block">
-  <h3>Let's turn this estimate into a real plan.</h3>
-  <p>Fill out a few questions about your family and what you're dreaming up for this trip — then you'll get an email with my calendar link to set up a time to chat.</p>
-  <a class="cta-btn" href="https://www.yourbestyestravel.com/trip_form">Your best yes starts here →</a>
 </div>
 
 <script>
 function fmt(n) {
-  return '$' + Math.round(n).toLocaleString();
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+function monthLabel(offset) {
+  var d = new Date();
+  d.setDate(1);
+  d.setMonth(d.getMonth() + offset);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return months[d.getMonth()] + ' ' + d.getFullYear();
 }
 
-function calc() {
-  const total = Math.max(500, parseFloat(document.getElementById('total').value) || 0);
-  const travelers = Math.max(1, parseInt(document.getElementById('travelers').value) || 1);
-  const numPayments = parseInt(document.getElementById('payments').value) || 10;
+function recalc() {
+  var total = parseFloat(document.getElementById('tripTotal').value) || 0;
+  var travelers = parseInt(document.getElementById('travelers').value) || 1;
+  var perPerson = parseInt(document.getElementById('cruiseLength').value);
+  var installments = parseInt(document.getElementById('installments').value);
 
-  document.getElementById('payments-label').textContent = numPayments;
+  var deposit = perPerson * travelers;
+  var balance = Math.max(total - deposit, 0);
+  var baseInstallment = installments > 0 ? Math.floor((balance / installments) * 100) / 100 : 0;
+  var finalInstallment = installments > 0 ? balance - baseInstallment * (installments - 1) : 0;
 
-  const deposit = travelers * 100;
-  const balance = total - deposit;
-  const perPayment = balance / numPayments;
+  document.getElementById('depositOut').textContent = fmt(deposit);
+  document.getElementById('depositSub').textContent = '$' + perPerson + ' × ' + travelers + ' travelers';
+  document.getElementById('balanceOut').textContent = fmt(balance);
+  document.getElementById('eachOut').textContent = fmt(baseInstallment);
+  document.getElementById('eachSub').textContent = 'over ' + installments + ' payment' + (installments === 1 ? '' : 's');
+  document.getElementById('installmentsOut').textContent = installments;
 
-  document.getElementById('deposit-total').textContent = fmt(deposit);
-  document.getElementById('deposit-sub').textContent = '$100 × ' + travelers + ' travelers';
-  document.getElementById('balance').textContent = fmt(balance);
-  document.getElementById('per-payment').textContent = fmt(perPayment);
-  document.getElementById('per-payment-sub').textContent = 'over ' + numPayments + ' payment' + (numPayments > 1 ? 's' : '');
+  var rows = '';
+  rows += '<tr class="deposit-row"><td>0</td><td><div class="pay-title pink">Deposit — today</div>' +
+          '<div class="pay-sub">Reserves your sailing · non-refundable on NRD fare</div></td>' +
+          '<td class="amt">' + fmt(deposit) + '</td></tr>';
 
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const today = new Date();
-  let html = '';
-
-  html += '<div class="payment-row deposit-row">';
-  html += '<span class="p-num">0</span>';
-  html += '<div class="p-info"><div class="p-title">Deposit — today</div><div class="p-sub">Reserves your sailing · non-refundable on NRD fare</div></div>';
-  html += '<span class="p-amt">' + fmt(deposit) + '</span>';
-  html += '</div>';
-
-  for (let i = 1; i <= numPayments; i++) {
-    const d = new Date(today);
-    d.setMonth(d.getMonth() + i);
-    const dateStr = months[d.getMonth()] + ' ' + d.getFullYear();
-    const isFinal = i === numPayments;
-    const rowClass = isFinal ? 'payment-row final-row' : 'payment-row';
-    const title = isFinal ? 'Final payment' : 'Payment ' + i;
-    const sub = isFinal ? 'Booking paid in full · ' + dateStr : 'Scheduled installment · ' + dateStr;
-    html += '<div class="' + rowClass + '">';
-    html += '<span class="p-num">' + i + '</span>';
-    html += '<div class="p-info"><div class="p-title">' + title + '</div><div class="p-sub">' + sub + '</div></div>';
-    html += '<span class="p-amt">' + fmt(perPayment) + '</span>';
-    html += '</div>';
+  for (var i = 1; i <= installments; i++) {
+    var isFinal = (i === installments);
+    var amount = isFinal ? finalInstallment : baseInstallment;
+    var rowClass = isFinal ? 'final-row' : '';
+    var titleClass = isFinal ? 'pay-title teal-text' : 'pay-title';
+    var label = isFinal ? 'Final payment' : ('Payment ' + i);
+    rows += '<tr class="' + rowClass + '"><td>' + i + '</td><td><div class="' + titleClass + '">' + label + '</div>' +
+            '<div class="pay-sub">Scheduled installment · ' + monthLabel(i) + '</div></td>' +
+            '<td class="amt">' + fmt(amount) + '</td></tr>';
   }
-
-  document.getElementById('schedule').innerHTML = html;
+  document.getElementById('scheduleBody').innerHTML = rows;
 }
 
-document.getElementById('total').addEventListener('input', calc);
-document.getElementById('travelers').addEventListener('input', calc);
-document.getElementById('payments').addEventListener('input', calc);
-calc();
+['tripTotal','travelers','cruiseLength','installments'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', recalc);
+});
+recalc();
 </script>
 </body>
 </html>
